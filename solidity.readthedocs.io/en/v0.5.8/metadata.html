@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from solidity.readthedocs.io/en/v0.5.8/metadata.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2019 10:27:00 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contract Metadata &mdash; Solidity 0.5.8 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contract ABI Specification" href="abi-spec.html" />
+    <link rel="prev" title="Using the compiler" href="using-the-compiler.html" /> 
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="https://solidity.readthedocs.io/en/v0.5.7/metadata.html" />
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'metadata'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> Solidity
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                v0.5.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://solidity.readthedocs.io/en/v0.5.8/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction-to-smart-contracts.html">Introduction to Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-solidity.html">Installing the Solidity Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solidity-by-example.html">Solidity by Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solidity-in-depth.html">Solidity in Depth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="natspec-format.html">NatSpec Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security-considerations.html">Security Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-the-compiler.html">Using the compiler</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contract Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#encoding-of-the-metadata-hash-in-the-bytecode">Encoding of the Metadata Hash in the Bytecode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-for-automatic-interface-generation-and-natspec">Usage for Automatic Interface Generation and NatSpec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-for-source-code-verification">Usage for Source Code Verification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="abi-spec.html">Contract ABI Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yul.html">Yul</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style-guide.html">Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common-patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">List of Known Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lll.html">LLL</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Keyword Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">Solidity</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> &raquo;</li>
+        
+      <li>Contract Metadata</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/ethereum/solidity/blob/v0.5.8/docs/metadata.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contract-metadata">
+<h1>Contract Metadata<a class="headerlink" href="#contract-metadata" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">The Solidity compiler automatically generates a JSON file, the contract
+metadata, that contains information about the current contract. You can use
+this file to query the compiler version, the sources used, the ABI and NatSpec
+documentation to more safely interact with the contract and verify its source
+code.</p>
+<p>The compiler appends a Swarm hash of the metadata file to the end of the
+bytecode (for details, see below) of each contract, so that you can retrieve
+the file in an authenticated way without having to resort to a centralized
+data provider.</p>
+<p>You have to publish the metadata file to Swarm (or another service) so that
+others can access it. You create the file by using the <code class="docutils literal notranslate"><span class="pre">solc</span> <span class="pre">--metadata</span></code>
+command that generates a file called <code class="docutils literal notranslate"><span class="pre">ContractName_meta.json</span></code>. It contains
+Swarm references to the source code, so you have to upload all source files and
+the metadata file.</p>
+<p>The metadata file has the following format. The example below is presented in a
+human-readable way. Properly formatted metadata should use quotes correctly,
+reduce whitespace to a minimum and sort the keys of all objects to arrive at a
+unique formatting. Comments are not permitted and used here only for
+explanatory purposes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{
+  // Required: The version of the metadata format
+  version: &quot;1&quot;,
+  // Required: Source code language, basically selects a &quot;sub-version&quot;
+  // of the specification
+  language: &quot;Solidity&quot;,
+  // Required: Details about the compiler, contents are specific
+  // to the language.
+  compiler: {
+    // Required for Solidity: Version of the compiler
+    version: &quot;0.4.6+commit.2dabbdf0.Emscripten.clang&quot;,
+    // Optional: Hash of the compiler binary which produced this output
+    keccak256: &quot;0x123...&quot;
+  },
+  // Required: Compilation source files/source units, keys are file names
+  sources:
+  {
+    &quot;myFile.sol&quot;: {
+      // Required: keccak256 hash of the source file
+      &quot;keccak256&quot;: &quot;0x123...&quot;,
+      // Required (unless &quot;content&quot; is used, see below): Sorted URL(s)
+      // to the source file, protocol is more or less arbitrary, but a
+      // Swarm URL is recommended
+      &quot;urls&quot;: [ &quot;bzzr://56ab...&quot; ]
+    },
+    &quot;mortal&quot;: {
+      // Required: keccak256 hash of the source file
+      &quot;keccak256&quot;: &quot;0x234...&quot;,
+      // Required (unless &quot;url&quot; is used): literal contents of the source file
+      &quot;content&quot;: &quot;contract mortal is owned { function kill() { if (msg.sender == owner) selfdestruct(owner); } }&quot;
+    }
+  },
+  // Required: Compiler settings
+  settings:
+  {
+    // Required for Solidity: Sorted list of remappings
+    remappings: [ &quot;:g=/dir&quot; ],
+    // Optional: Optimizer settings. The fields &quot;enabled&quot; and &quot;runs&quot; are deprecated
+    // and are only given for backwards-compatibility.
+    optimizer: {
+      enabled: true,
+      runs: 500,
+      details: {
+        // peephole defaults to &quot;true&quot;
+        peephole: true,
+        // jumpdestRemover defaults to &quot;true&quot;
+        jumpdestRemover: true,
+        orderLiterals: false,
+        deduplicate: false,
+        cse: false,
+        constantOptimizer: false,
+        yul: false,
+        yulDetails: {}
+      }
+    },
+    metadata: {
+      // Reflects the setting used in the input json, defaults to false
+      useLiteralContent: true
+    }
+    // Required for Solidity: File and name of the contract or library this
+    // metadata is created for.
+    compilationTarget: {
+      &quot;myFile.sol&quot;: &quot;MyContract&quot;
+    },
+    // Required for Solidity: Addresses for libraries used
+    libraries: {
+      &quot;MyLib&quot;: &quot;0x123123...&quot;
+    }
+  },
+  // Required: Generated information about the contract.
+  output:
+  {
+    // Required: ABI definition of the contract
+    abi: [ ... ],
+    // Required: NatSpec user documentation of the contract
+    userdoc: [ ... ],
+    // Required: NatSpec developer documentation of the contract
+    devdoc: [ ... ],
+  }
+}
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since the bytecode of the resulting contract contains the metadata hash, any
+change to the metadata results in a change of the bytecode. This includes
+changes to a filename or path, and since the metadata includes a hash of all the
+sources used, a single whitespace change results in different metadata, and
+different bytecode.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note the ABI definition above has no fixed order. It can change with compiler versions.</p>
+</div>
+<div class="section" id="encoding-of-the-metadata-hash-in-the-bytecode">
+<h2>Encoding of the Metadata Hash in the Bytecode<a class="headerlink" href="#encoding-of-the-metadata-hash-in-the-bytecode" title="Permalink to this headline">¶</a></h2>
+<p>Because we might support other ways to retrieve the metadata file in the future,
+the mapping <code class="docutils literal notranslate"><span class="pre">{&quot;bzzr0&quot;:</span> <span class="pre">&lt;Swarm</span> <span class="pre">hash&gt;}</span></code> is stored
+<a class="reference external" href="https://tools.ietf.org/html/rfc7049">CBOR</a>-encoded. Since the mapping might
+contain more keys (see below) and the beginning of that
+encoding is not easy to find, its length is added in a two-byte big-endian
+encoding. The current version of the Solidity compiler usually adds the following
+to the end of the deployed bytecode:</p>
+<div class="highlight-Solidity notranslate"><div class="highlight"><pre><span></span><span class="mh">0xa1</span> <span class="mh">0x65</span> <span class="s">&#39;b&#39;</span> <span class="s">&#39;z&#39;</span> <span class="s">&#39;z&#39;</span> <span class="s">&#39;r&#39;</span> <span class="s">&#39;0&#39;</span> <span class="mh">0x58</span> <span class="mh">0x20</span> <span class="o">&lt;</span><span class="mi">32</span> <span class="kt">bytes</span> <span class="n">swarm</span> <span class="n">hash</span><span class="o">&gt;</span> <span class="mh">0x00</span> <span class="mh">0x29</span>
+</pre></div>
+</div>
+<p>So in order to retrieve the data, the end of the deployed bytecode can be checked
+to match that pattern and use the Swarm hash to retrieve the file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The CBOR mapping can also contain other keys, so it is better to fully
+decode the data instead of relying on it starting with <code class="docutils literal notranslate"><span class="pre">0xa165</span></code>.
+For example, if any experimental features that affect code generation
+are used, the mapping will also contain <code class="docutils literal notranslate"><span class="pre">&quot;experimental&quot;:</span> <span class="pre">true</span></code>.
+Furthermore, we are planning to add the compiler version to the mapping
+to ease source-verification and scanning for bugs.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The compiler currently uses the “swarm version 0” hash of the metadata,
+but this might change in the future, so do not rely on this sequence
+to start with <code class="docutils literal notranslate"><span class="pre">0xa1</span> <span class="pre">0x65</span> <span class="pre">'b'</span> <span class="pre">'z'</span> <span class="pre">'z'</span> <span class="pre">'r'</span> <span class="pre">'0'</span></code>. We might also
+add additional data to this CBOR structure, so the
+best option is to use a proper CBOR parser.</p>
+</div>
+</div>
+<div class="section" id="usage-for-automatic-interface-generation-and-natspec">
+<h2>Usage for Automatic Interface Generation and NatSpec<a class="headerlink" href="#usage-for-automatic-interface-generation-and-natspec" title="Permalink to this headline">¶</a></h2>
+<p>The metadata is used in the following way: A component that wants to interact
+with a contract (e.g. Mist or any wallet) retrieves the code of the contract, from that
+the Swarm hash of a file which is then retrieved.
+That file is JSON-decoded into a structure like above.</p>
+<p>The component can then use the ABI to automatically generate a rudimentary
+user interface for the contract.</p>
+<p>Furthermore, the wallet can use the NatSpec user documentation to display a confirmation message to the user
+whenever they interact with the contract, together with requesting
+authorization for the transaction signature.</p>
+<p>For additional information, read <a class="reference internal" href="natspec-format.html"><span class="doc">Ethereum Natural Language Specification (NatSpec) format</span></a>.</p>
+</div>
+<div class="section" id="usage-for-source-code-verification">
+<h2>Usage for Source Code Verification<a class="headerlink" href="#usage-for-source-code-verification" title="Permalink to this headline">¶</a></h2>
+<p>In order to verify the compilation, sources can be retrieved from Swarm
+via the link in the metadata file.
+The compiler of the correct version (which is checked to be part of the “official” compilers)
+is invoked on that input with the specified settings. The resulting
+bytecode is compared to the data of the creation transaction or <code class="docutils literal notranslate"><span class="pre">CREATE</span></code> opcode data.
+This automatically verifies the metadata since its hash is part of the bytecode.
+Excess data corresponds to the constructor input data, which should be decoded
+according to the interface and presented to the user.</p>
+<p>In the repository [source-verify](<a class="reference external" href="https://github.com/ethereum/source-verify">https://github.com/ethereum/source-verify</a>)
+([npm package](<a class="reference external" href="https://www.npmjs.com/package/source-verify">https://www.npmjs.com/package/source-verify</a>)) you can see
+example code that shows how to use this feature.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="abi-spec.html" class="btn btn-neutral float-right" title="Contract ABI Specification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using-the-compiler.html" class="btn btn-neutral float-left" title="Using the compiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, Ethereum
+      
+        <span class="commit">
+          Revision <code>23d335f2</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: v0.5.8
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/stable/">stable</a></dd>
+        
+          <dd><a href="index.html">v0.5.8</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.7/">v0.5.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.6/">v0.5.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.5/">v0.5.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.4/">v0.5.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.3/">v0.5.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.2/">v0.5.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.1/">v0.5.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.0/">v0.5.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.25/">v0.4.25</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.24/">v0.4.24</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.23/">v0.4.23</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.22/">v0.4.22</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.21/">v0.4.21</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.20/">v0.4.20</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.19/">v0.4.19</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.18/">v0.4.18</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.17/">v0.4.17</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.16/">v0.4.16</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.15/">v0.4.15</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.14/">v0.4.14</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.13/">v0.4.13</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.12/">v0.4.12</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.11/">v0.4.11</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.10/">v0.4.10</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.9/">v0.4.9</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.8/">v0.4.8</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.7/">v0.4.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.6/">v0.4.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.5/">v0.4.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.4/">v0.4.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.3/">v0.4.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.2/">v0.4.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.1/">v0.4.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.0/">v0.4.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.6/">v0.3.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.5/">v0.3.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.4/">v0.3.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.3/">v0.3.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.2/">v0.3.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.1/">v0.3.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.0/">v0.3.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.2/">v0.2.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.1/">v0.2.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.0/">v0.2.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.7/">v0.1.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.6/">v0.1.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.5/">v0.1.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.4/">v0.1.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.3/">v0.1.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.2/">v0.1.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/develop/">develop</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/solidity/?fromdocs=solidity">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/solidity/?fromdocs=solidity">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from solidity.readthedocs.io/en/v0.5.8/metadata.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2019 10:27:00 GMT -->
+</html>

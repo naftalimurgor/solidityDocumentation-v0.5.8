@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<!-- Mirrored from solidity.readthedocs.io/en/v0.5.8/solidity-in-depth.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2019 10:26:58 GMT -->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Solidity in Depth &mdash; Solidity 0.5.8 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Layout of a Solidity Source File" href="layout-of-source-files.html" />
+    <link rel="prev" title="Solidity by Example" href="solidity-by-example.html" /> 
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="https://solidity.readthedocs.io/en/v0.5.7/solidity-in-depth.html" />
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'solidity-in-depth'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> Solidity
+          
+
+          
+          </a>
+
+          
+            
+            
+            
+              <div class="version">
+                v0.5.8
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://solidity.readthedocs.io/en/v0.5.8/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction-to-smart-contracts.html">Introduction to Smart Contracts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing-solidity.html">Installing the Solidity Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solidity-by-example.html">Solidity by Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Solidity in Depth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="layout-of-source-files.html">Layout of a Solidity Source File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html">Structure of a Contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="units-and-global-variables.html">Units and Globally Available Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html">Expressions and Control Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">Contracts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assembly.html">Solidity Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html">Solidity v0.5.0 Breaking Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="natspec-format.html">NatSpec Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security-considerations.html">Security Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-the-compiler.html">Using the compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Contract Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abi-spec.html">Contract ABI Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yul.html">Yul</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style-guide.html">Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common-patterns.html">Common Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">List of Known Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lll.html">LLL</a></li>
+</ul>
+
+            
+          
+    <a href="genindex.html">Keyword Index</a>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">Solidity</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> &raquo;</li>
+        
+      <li>Solidity in Depth</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/ethereum/solidity/blob/v0.5.8/docs/solidity-in-depth.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="solidity-in-depth">
+<h1>Solidity in Depth<a class="headerlink" href="#solidity-in-depth" title="Permalink to this headline">¶</a></h1>
+<p>This section should provide you with all you need to know about Solidity.
+If something is missing here, please contact us on
+<a class="reference external" href="https://gitter.im/ethereum/solidity">Gitter</a> or create a pull request on
+<a class="reference external" href="https://github.com/ethereum/solidity/pulls">Github</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="layout-of-source-files.html">Layout of a Solidity Source File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="layout-of-source-files.html#pragmas">Pragmas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout-of-source-files.html#importing-other-source-files">Importing other Source Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout-of-source-files.html#comments">Comments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="structure-of-a-contract.html">Structure of a Contract</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#state-variables">State Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#function-modifiers">Function Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#struct-types">Struct Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structure-of-a-contract.html#enum-types">Enum Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="types.html#value-types">Value Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#reference-types">Reference Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#mapping-types">Mapping Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#operators-involving-lvalues">Operators Involving LValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#conversions-between-elementary-types">Conversions between Elementary Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="types.html#conversions-between-literals-and-elementary-types">Conversions between Literals and Elementary Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="units-and-global-variables.html">Units and Globally Available Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="units-and-global-variables.html#ether-units">Ether Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="units-and-global-variables.html#time-units">Time Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="units-and-global-variables.html#special-variables-and-functions">Special Variables and Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="control-structures.html">Expressions and Control Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#control-structures">Control Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#function-calls">Function Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#creating-contracts-via-new">Creating Contracts via <code class="docutils literal notranslate"><span class="pre">new</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#order-of-evaluation-of-expressions">Order of Evaluation of Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#assignment">Assignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#scoping-and-declarations">Scoping and Declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-structures.html#error-handling-assert-require-revert-and-exceptions">Error handling: Assert, Require, Revert and Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contracts.html">Contracts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#creating-contracts">Creating Contracts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#visibility-and-getters">Visibility and Getters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#function-modifiers">Function Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#constant-state-variables">Constant State Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#inheritance">Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#abstract-contracts">Abstract Contracts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#interfaces">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#libraries">Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html#using-for">Using For</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assembly.html">Solidity Assembly</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assembly.html#inline-assembly">Inline Assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assembly.html#standalone-assembly">Standalone Assembly</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#layout-of-state-variables-in-storage">Layout of State Variables in Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#layout-in-memory">Layout in Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#layout-of-call-data">Layout of Call Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#internals-cleaning-up-variables">Internals - Cleaning Up Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#internals-the-optimiser">Internals - The Optimiser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#source-mappings">Source Mappings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#tips-and-tricks">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html#cheatsheet">Cheatsheet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="050-breaking-changes.html">Solidity v0.5.0 Breaking Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#semantic-only-changes">Semantic Only Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#semantic-and-syntactic-changes">Semantic and Syntactic Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#explicitness-requirements">Explicitness Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#deprecated-elements">Deprecated Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#interoperability-with-older-contracts">Interoperability With Older Contracts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050-breaking-changes.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="layout-of-source-files.html" class="btn btn-neutral float-right" title="Layout of a Solidity Source File" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="solidity-by-example.html" class="btn btn-neutral float-left" title="Solidity by Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2019, Ethereum
+      
+        <span class="commit">
+          Revision <code>23d335f2</code>.
+        </span>
+      
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org/">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: v0.5.8
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/stable/">stable</a></dd>
+        
+          <dd><a href="index.html">v0.5.8</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.7/">v0.5.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.6/">v0.5.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.5/">v0.5.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.4/">v0.5.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.3/">v0.5.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.2/">v0.5.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.1/">v0.5.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.5.0/">v0.5.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.25/">v0.4.25</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.24/">v0.4.24</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.23/">v0.4.23</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.22/">v0.4.22</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.21/">v0.4.21</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.20/">v0.4.20</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.19/">v0.4.19</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.18/">v0.4.18</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.17/">v0.4.17</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.16/">v0.4.16</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.15/">v0.4.15</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.14/">v0.4.14</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.13/">v0.4.13</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.12/">v0.4.12</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.11/">v0.4.11</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.10/">v0.4.10</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.9/">v0.4.9</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.8/">v0.4.8</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.7/">v0.4.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.6/">v0.4.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.5/">v0.4.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.4/">v0.4.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.3/">v0.4.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.2/">v0.4.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.1/">v0.4.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.4.0/">v0.4.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.6/">v0.3.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.5/">v0.3.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.4/">v0.3.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.3/">v0.3.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.2/">v0.3.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.1/">v0.3.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.3.0/">v0.3.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.2/">v0.2.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.1/">v0.2.1</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.2.0/">v0.2.0</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.7/">v0.1.7</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.6/">v0.1.6</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.5/">v0.1.5</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.4/">v0.1.4</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.3/">v0.1.3</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/v0.1.2/">v0.1.2</a></dd>
+        
+          <dd><a href="https://solidity.readthedocs.io/en/develop/">develop</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/solidity/?fromdocs=solidity">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/solidity/?fromdocs=solidity">Builds</a>
+          </dd>
+      </dl>
+      <hr/>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+   
+
+</body>
+
+<!-- Mirrored from solidity.readthedocs.io/en/v0.5.8/solidity-in-depth.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 May 2019 10:26:58 GMT -->
+</html>

@@ -1,0 +1,17 @@
+HTTrack3.48-21 launched on Wed, 01 May 2019 13:25:02 at https://solidity.readthedocs.io/en/v0.5.8/
+(httrack https://solidity.readthedocs.io/en/v0.5.8/ )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+13:27:08	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/_static/fonts/RobotoSlab/roboto-slab.eot (from https://solidity.readthedocs.io/en/v0.5.8/_static/css/theme.css)
+13:27:09	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/mathematical-and-cryptographic-functions (from https://solidity.readthedocs.io/en/v0.5.8/solidity-by-example.html)
+13:27:09	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/assembly (from https://solidity.readthedocs.io/en/v0.5.8/solidity-by-example.html)
+13:27:09	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/Ethereum-Contract-ABI (from https://solidity.readthedocs.io/en/v0.5.8/natspec-format.html)
+13:27:09	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/simple-smart-contract (from https://solidity.readthedocs.io/en/v0.5.8/style-guide.html)
+13:27:09	Error: 	"Not Found" (404) at link https://solidity.readthedocs.io/en/v0.5.8/natspec (from https://solidity.readthedocs.io/en/v0.5.8/style-guide.html)
+
+HTTrack Website Copier/3.48-21 mirror complete in 2 minutes 7 seconds : 85 links scanned, 78 files written (10652236 bytes overall) [8545880 bytes received at 67290 bytes/sec], 5261269 bytes transferred using HTTP compression in 64 files, ratio 57%
+(6 errors, 0 warnings, 0 messages)
